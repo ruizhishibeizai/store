@@ -139,8 +139,9 @@
 		</footer>
 		<!--页脚结束-->
 		<script type="text/javascript">
-			//监听按钮是否被点击，如果被点击可执行一个方法
+			//1.监听按钮是否被点击，如果被点击可执行自定义的function方法
 			$("#btn-reg").click(function() {
+				//2.如果被点击执行ajax()异步请求完成用户注册
 				console.log($("#form-reg").serialize());
 				$.ajax({
 					url: "/users/reg",
