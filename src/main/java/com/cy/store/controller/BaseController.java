@@ -6,11 +6,11 @@ package com.cy.store.controller;
  * @create: 2022-10-16 19:18
  **/
 
-import com.cy.store.service.ex.InsertException;
-import com.cy.store.service.ex.ServiceException;
-import com.cy.store.service.ex.UsernameDuplicatedException;
+import com.cy.store.service.ex.*;
 import com.cy.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import javax.servlet.http.HttpSession;
 
 /**控制层的基类**/
 public class BaseController {
@@ -37,10 +37,38 @@ public class BaseController {
         if(e instanceof UsernameDuplicatedException){
             result.setState(4000);
 //            result.setMessage("用户名被占用");
+        }
+        else if(e instanceof UserNotFoundException){
+            result.setState(5001);
+//            result.setMessage("用户没有找到");
+        }
+        else if(e instanceof PasswordNotMatchException){
+            result.setState(5002);
+//            result.setMessage("密码错误");
         }else if(e instanceof InsertException){
             result.setState(5000);
 //            result.setMessage("注册产生未知异常");
         }
         return result;
+    }
+
+    /**
+     *  获取session对象中的uid
+     * @param session session对象
+     * @return uid
+     */
+    protected final Integer getuidFromSession(HttpSession session){
+        Object uid = session.getAttribute("uid");
+        return Integer.valueOf(uid.toString());
+    }
+
+    /**
+     *  获取session对象中的uid
+     * @param session session对象
+     * @return username
+     */
+    protected final String getUsernameFromSession(HttpSession session){
+        return session.getAttribute("username").toString();
+
     }
 }

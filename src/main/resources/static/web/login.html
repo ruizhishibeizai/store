@@ -153,6 +153,7 @@
 					success: function(json) {
 						if (json.state == 200) {
 							alert("登录成功！");
+							//跳转到index.html
 							location.href = "index.html";
 							//	头像保存至cookie
 							$.cookie("avatar", json.data.avatar, {expires: 7});
