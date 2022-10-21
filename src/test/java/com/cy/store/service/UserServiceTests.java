@@ -43,10 +43,16 @@ public class UserServiceTests {
             System.out.println(e.getMessage());
         }
     }
+
     @Test
     public void login(){
         User user = iUserService.login("tim09", "123");
         System.out.println(user);
+    }
+
+    @Test
+    public void changePassword(){
+        iUserService.changePassword(9,"tim08","123","321");
     }
 
 

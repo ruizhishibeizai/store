@@ -50,4 +50,46 @@
         SELECT * FROM t_user WHERE username = #{username}
     </select>
 
+
+    <!-- Integer updatePasswordByUid(
+            Integer uid,
+            String password,
+            String modifiedUser,
+            Date modifiedTime);-->
+    <update id="updatePasswordByUid">
+        UPDATE
+            t_user
+        SET
+            password = #{password},
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        WHERE
+            uid = #{uid}
+    </update>
+
+    <!-- 根据用户id查询用户数据：User findByUid(Integer uid) -->
+    <select id="findByUid" resultMap="UserEntityMap">
+        SELECT
+            *
+        FROM
+            t_user
+        WHERE
+            uid = #{uid}
+    </select>
+
+<!--    Integer updateInfoByUid(User user);-->
+    <update id="updateInfoByUid">
+        UPDATE
+            t_user
+        SET
+        <!--if表示条件判断语句，test标签里为true才执行标签里的语句 -->
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="gender != null">gender = #{gender},</if>
+            modified_user = #{modifiedUser},
+            modified_time = #{modifiedTime}
+        WHERE
+            uid = #{uid}
+    </update>
+
 </mapper>

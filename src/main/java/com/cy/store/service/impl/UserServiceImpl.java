@@ -3,10 +3,7 @@ package com.cy.store.service.impl;
 import com.cy.store.entity.User;
 import com.cy.store.mapper.UserMapper;
 import com.cy.store.service.IUserService;
-import com.cy.store.service.ex.InsertException;
-import com.cy.store.service.ex.PasswordNotMatchException;
-import com.cy.store.service.ex.UserNotFoundException;
-import com.cy.store.service.ex.UsernameDuplicatedException;
+import com.cy.store.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -26,7 +23,7 @@ import java.util.UUID;
  *  类似与@Mapper
  * **/
 @Service
-public class UserServiceImpl implements IUserService {
+public class  UserServiceImpl implements IUserService {
 
 
     @Autowired
@@ -126,5 +123,36 @@ public class UserServiceImpl implements IUserService {
          * 如uid username avatar等
          * **/
         return user;
+    }
+
+    /**
+     * 实现父接口的修改密码方法，username参数不需要？
+     * @param uid
+     * @param username
+     * @param oldPassword
+     * @param newPassoword
+     */
+    @Override
+    public void changePassword(Integer uid,
+                               String username,
+                               String oldPassword,
+                               String newPassoword) {
+        User result = userMapper.findByUid(uid);
+        //不存在或者标记已删除则返回用户不存在
+        if(result == null || result.getIsDelete() == 1){
+            throw new UserNotFoundException("用户不存在");
+        }
+        //对比老密码和数据库密码是否一致
+        if(!result.getPassword().equals(getMD5Password(oldPassword,result.getSalt()))){
+            throw new PasswordNotMatchException("密码错误");
+        }
+        //先加密新密码，再修改进数据库
+        String newMD5Password = getMD5Password(newPassoword,result.getSalt());
+        Integer rows = userMapper.updatePasswordByUid(uid, newMD5Password, "管理员", new Date());
+
+        if (rows != 1){
+            throw new UpdateException("密码修改时出现未知异常");
+        }
+
     }
 }

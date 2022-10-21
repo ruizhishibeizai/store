@@ -1,11 +1,15 @@
 package com.cy.store.mapper;
 
 import com.cy.store.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import javax.jws.soap.SOAPBinding;
+import java.util.Date;
 
 
 /**
@@ -44,5 +48,35 @@ public class UserMapperTests {
     public void findByUsername(){
         User user = userMapper.findByUsername("tim");
         System.out.println(user);
+    }
+
+    @Test
+    public void findByUid(){
+        System.out.println(userMapper.findByUid(10));
+    }
+
+
+//    Integer updatePasswordByUid(
+//            Integer uid,
+//            String password,
+//            String modifiedUser,
+//            Date modifiedTime);
+    @Test
+    public void updatePasswordByUid(){
+        userMapper.updatePasswordByUid(
+                10,
+                "123",
+                "管理员",
+                new Date());
+    }
+
+    @Test
+    public void updateInfoByUid(){
+        User user = new User();
+        user.setUid(10);
+        user.setGender(1);
+        user.setPhone("13249186666");
+        user.setEmail("@qq.com");
+        userMapper.updateInfoByUid(user);
     }
 }

@@ -94,4 +94,16 @@ public class UserController extends BaseController {
         return  new JsonResult<User>(OK,data);
     }
 
+    @RequestMapping("change_password")
+    public JsonResult<Void> changePassword(HttpSession session,
+                                           String oldPassword,
+                                           String newPassword){
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+
+        iUserService.changePassword(uid,username,
+                oldPassword,newPassword);
+        return new JsonResult<>(OK);
+
+    }
 }
