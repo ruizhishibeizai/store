@@ -84,5 +84,19 @@ public class UserServiceTests {
         }
     }
 
+    @Test
+    public void changeAvatar() {
+        try {
+            Integer uid = 10;
+            String username = "头像管理员";
+            String avatar = "/upload/avatar.png";
+            iUserService.changeAvatar(uid, username, avatar);
+            System.out.println("OK.");
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
+
 
 }

@@ -1,9 +1,6 @@
 package com.cy.store.controller;
 
-import com.cy.store.controller.ex.FileEmptyException;
-import com.cy.store.controller.ex.FileSizeException;
-import com.cy.store.controller.ex.FileStateException;
-import com.cy.store.controller.ex.FileTypeException;
+import com.cy.store.controller.ex.*;
 import com.cy.store.entity.BaseEntitiy;
 import com.cy.store.entity.User;
 import com.cy.store.service.IUserService;
@@ -16,7 +13,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -134,6 +134,18 @@ public class UserController extends BaseController {
     }
 
 
+    /** 头像文件大小的上限值(10MB) */
+    public static final int AVATAR_MAX_SIZE = 10 * 1024 * 1024;
+    /** 允许上传的头像的文件类型 */
+    public static final List<String> AVATAR_TYPES = new ArrayList<String>();
+
+    /** 初始化允许上传的头像的文件类型 */
+    static {
+        AVATAR_TYPES.add("image/jpeg");
+        AVATAR_TYPES.add("image/png");
+        AVATAR_TYPES.add("image/bmp");
+        AVATAR_TYPES.add("image/gif");
+    }
     /**
      * MultipartFile接口是springmvc提供的接口，可以接收任何类型的file
      * springboot整合了springmvc 只需要在参数列表中声明multipartfile
@@ -181,6 +193,9 @@ public class UserController extends BaseController {
         // 保存的头像文件的文件名
         String suffix = "";
         String originalFilename = file.getOriginalFilename();
+
+        System.out.println(originalFilename);
+
         int beginIndex = originalFilename.lastIndexOf(".");
         if (beginIndex > 0) {
             suffix = originalFilename.substring(beginIndex);
@@ -203,10 +218,10 @@ public class UserController extends BaseController {
         // 头像路径
         String avatar = "/upload/" + filename;
         // 从Session中获取uid和username
-        Integer uid = getUidFromSession(session);
+        Integer uid = getuidFromSession(session);
         String username = getUsernameFromSession(session);
         // 将头像写入到数据库中
-        userService.changeAvatar(uid, username, avatar);
+        iUserService.changeAvatar(uid, username, avatar);
 
         // 返回成功头像路径
         return new JsonResult<String>(OK, avatar);
