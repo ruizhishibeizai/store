@@ -6,6 +6,7 @@ package com.cy.store.controller;
  * @create: 2022-10-16 19:18
  **/
 
+import com.cy.store.controller.ex.*;
 import com.cy.store.service.ex.*;
 import com.cy.store.util.JsonResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -24,7 +25,7 @@ public class BaseController {
      * 可以自动将异常对象传给此方法的参数列表上
      * @return
      */
-    @ExceptionHandler(ServiceException.class)
+    @ExceptionHandler({ServiceException.class,FileUploadException.class})
     public JsonResult<Void> handException(Throwable e){
        /**
         * Controller映射并调用Service层方法时，
@@ -51,6 +52,16 @@ public class BaseController {
         }else if(e instanceof UpdateException){
             result.setState(5001);
 //            result.setMessage("更新数据时产生未知异常");
+        }else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
         }
 
         return result;
