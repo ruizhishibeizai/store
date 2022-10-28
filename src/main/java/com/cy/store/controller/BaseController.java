@@ -40,12 +40,15 @@ public class BaseController {
 //            result.setMessage("用户名被占用");
         }
         else if(e instanceof UserNotFoundException){
-            result.setState(5001);
+            result.setState(4001);
 //            result.setMessage("用户没有找到");
         }
         else if(e instanceof PasswordNotMatchException){
-            result.setState(5002);
+            result.setState(4002);
 //            result.setMessage("密码错误");
+        }else if(e instanceof AddressCountLimitException) {
+            result.setState(4003);
+//            result.setMessage("用户收获地址超出上限");
         }else if(e instanceof InsertException){
             result.setState(5000);
 //            result.setMessage("注册产生未知异常");

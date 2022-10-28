@@ -4,6 +4,7 @@ import com.cy.store.entity.Address;
 import com.cy.store.mapper.AddressMapper;
 import com.cy.store.service.IAddressService;
 //import com.cy.store.service.IDistrictService;
+import com.cy.store.service.IDistrictService;
 import com.cy.store.service.ex.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,8 +18,8 @@ import java.util.List;
 public class AddressServiceImpl implements IAddressService {
     @Autowired
     private AddressMapper addressMapper;
-//    @Autowired
-//    private IDistrictService districtService;
+    @Autowired
+    private IDistrictService districtService;
 
     //读取配置文件中user.address.max-count变量的值
     @Value("${user.address.max-count}")
@@ -35,12 +36,13 @@ public class AddressServiceImpl implements IAddressService {
         }
 
         // 补全数据：省、市、区的名称
-//        String provinceName = districtService.getNameByCode(address.getProvinceCode());
-//        String cityName = districtService.getNameByCode(address.getCityCode());
-//        String areaName = districtService.getNameByCode(address.getAreaCode());
-//        address.setProvinceName(provinceName);
-//        address.setCityName(cityName);
-//        address.setAreaName(areaName);
+        //前端传过来的数据是code，要依据code来得到城市的名字，并记录到数据库中
+        String provinceName = districtService.getNameByCode(address.getProvinceCode());
+        String cityName = districtService.getNameByCode(address.getCityCode());
+        String areaName = districtService.getNameByCode(address.getAreaCode());
+        address.setProvinceName(provinceName);
+        address.setCityName(cityName);
+        address.setAreaName(areaName);
 
         // 补全数据：将参数uid封装到参数address中
         address.setUid(uid);
