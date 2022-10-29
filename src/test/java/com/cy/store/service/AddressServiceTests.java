@@ -29,44 +29,44 @@ public class AddressServiceTests {
             System.out.println("OK.");
 
     }
-//
-//    @Test
-//    public void getByUid() {
-//        Integer uid = 26;
-//        List<Address> list = addressService.getByUid(uid);
-//        System.out.println("count=" + list.size());
-//        for (Address item : list) {
-//            System.out.println(item);
-//        }
-//    }
-//
-//    @Test
-//    public void setDefault() {
-//        try {
-//            Integer aid = 18;
-//            Integer uid = 30;
-//            String username = "系统管理员";
-//            addressService.setDefault(aid, uid, username);
-//            System.out.println("OK.");
-//        } catch (ServiceException e) {
-//            System.out.println(e.getClass().getSimpleName());
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    @Test
-//    public void delete() {
-//        try {
-//            Integer aid = 18;
-//            Integer uid = 30;
-//            String username = "明明";
-//            addressService.delete(aid, uid, username);
-//            System.out.println("OK.");
-//        } catch (ServiceException e) {
-//            System.out.println(e.getClass().getSimpleName());
-//            System.out.println(e.getMessage());
-//        }
-//    }
+
+    @Test
+    public void getByUid() {
+        Integer uid = 7;
+        List<Address> list = addressService.getByUid(uid);
+        System.out.println("count=" + list.size());
+        for (Address item : list) {
+            System.out.println(item);
+        }
+    }
+
+    @Test
+    public void setDefault() {
+        try {
+            Integer aid = 5;
+            Integer uid = 7;
+            String username = "系统管理员";
+            addressService.setDefault(aid, uid, username);
+            System.out.println("OK.");
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void delete() {
+        try {
+            Integer aid = 2;
+            Integer uid = 20;
+            String username = "明明";
+            addressService.delete(aid, uid, username);
+            System.out.println("OK.");
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
 
     /*
     @Test

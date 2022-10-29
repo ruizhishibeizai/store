@@ -29,29 +29,31 @@ public class AddressController extends BaseController {
         // 响应成功
         return new JsonResult<Void>(OK);
     }
-//
-//    @GetMapping({"", "/"})
-//    public JsonResult<List<Address>> getByUid(HttpSession session) {
-//        Integer uid = getUidFromSession(session);
-//        List<Address> data = addressService.getByUid(uid);
-//        return new JsonResult<List<Address>>(OK, data);
-//    }
-//
-//    @RequestMapping("{aid}/set_default")
-//    public JsonResult<Void> setDefault(@PathVariable("aid") Integer aid, HttpSession session) {
-//        Integer uid = getUidFromSession(session);
-//        String username = getUsernameFromSession(session);
-//        addressService.setDefault(aid, uid, username);
-//        return new JsonResult<Void>(OK);
-//    }
-//
-//    @RequestMapping("{aid}/delete")
-//    public JsonResult<Void> delete(@PathVariable("aid") Integer aid, HttpSession session) {
-//        Integer uid = getUidFromSession(session);
-//        String username = getUsernameFromSession(session);
-//        addressService.delete(aid, uid, username);
-//        return new JsonResult<Void>(OK);
-//    }
+
+    @GetMapping({"", "/"})
+    public JsonResult<List<Address>> getByUid(HttpSession session) {
+        Integer uid = getuidFromSession(session);
+        List<Address> data = addressService.getByUid(uid);
+        return new JsonResult<List<Address>>(OK, data);
+    }
+//    restful风格，{aid}可以放在set_default前面或者后面，
+//   记得前端表单拼接也按照这个顺序即可
+//    @PathVariable("aid"):把url中的aid注入到参数aid中
+    @RequestMapping("{aid}/set_default")
+    public JsonResult<Void> setDefault(@PathVariable("aid") Integer aid, HttpSession session) {
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+        addressService.setDefault(aid, uid, username);
+        return new JsonResult<Void>(OK);
+    }
+
+    @RequestMapping("{aid}/delete")
+    public JsonResult<Void> delete(@PathVariable("aid") Integer aid, HttpSession session) {
+        Integer uid = getuidFromSession(session);
+        String username = getUsernameFromSession(session);
+        addressService.delete(aid, uid, username);
+        return new JsonResult<Void>(OK);
+    }
 
 }
 

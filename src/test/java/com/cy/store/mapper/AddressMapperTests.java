@@ -34,50 +34,50 @@ public class AddressMapperTests {
         System.out.println("count=" + count);
     }
 
-//    @Test
-//    public void findByUid() {
-//        Integer uid = 26;
-//        List<Address> list = addressMapper.findByUid(uid);
-//        System.out.println("count=" + list.size());
-//        for (Address item : list) {
-//            System.out.println(item);
-//        }
-//    }
-//
-//    @Test
-//    public void updateNonDefaultByUid() {
-//        Integer uid = 30;
-//        Integer rows = addressMapper.updateNonDefaultByUid(uid);
-//        System.out.println("rows=" + rows);
-//    }
-//
-//    @Test
-//    public void updateDefaultByAid() {
-//        Integer aid = 19;
-//        String modifiedUser = "管理员";
-//        Date modifiedTime = new Date();
-//        Integer rows = addressMapper.updateDefaultByAid(aid, modifiedUser, modifiedTime);
-//        System.out.println("rows=" + rows);
-//    }
-//
-//    @Test
-//    public void findByAid() {
-//        Integer aid = 19;
-//        Address result = addressMapper.findByAid(aid);
-//        System.out.println(result);
-//    }
-//
-//    @Test
-//    public void deleteByAid() {
-//        Integer aid = 4;
-//        Integer rows = addressMapper.deleteByAid(aid);
-//        System.out.println("rows=" + rows);
-//    }
-//
-//    @Test
-//    public void findLastModified() {
-//        Integer uid = 30;
-//        Address result = addressMapper.findLastModified(uid);
-//        System.out.println(result);
-//    }
+    @Test
+    public void findByUid() {
+        Integer uid = 7;
+        List<Address> list = addressMapper.findByUid(uid);
+        System.out.println("count=" + list.size());
+        for (Address item : list) {
+            System.out.println(item);
+        }
+    }
+
+    @Test
+    public void updateNonDefaultByUid() {
+        Integer uid = 7;
+        Integer rows = addressMapper.updateNonDefaultByUid(uid);
+        System.out.println("rows=" + rows);
+    }
+
+    @Test
+    public void updateDefaultByAid() {
+        Integer aid = 3;
+        String modifiedUser = "管理员";
+        Date modifiedTime = new Date();
+        Integer rows = addressMapper.updateDefaultByAid(aid, modifiedUser, modifiedTime);
+        System.out.println("rows=" + rows);
+    }
+
+    @Test
+    public void findByAid() {
+        Integer aid = 3;
+        Address result = addressMapper.findByAid(aid);
+        System.out.println(result);
+    }
+
+    @Test
+    public void deleteByAid() {
+        Integer aid = 1;
+        Integer rows = addressMapper.deleteByAid(aid);
+        System.out.println("rows=" + rows);
+    }
+
+    @Test
+    public void findLastModified() {
+        Integer uid = 7;
+        Address result = addressMapper.findLastModified(uid);
+        System.out.println(result);
+    }
 }
