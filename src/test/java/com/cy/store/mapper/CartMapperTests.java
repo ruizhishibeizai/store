@@ -55,20 +55,20 @@ public class CartMapperTests {
         System.out.println(list);
     }
 
-//    @Test
-//    public void findByCid() {
-//        Integer cid = 6;
-//        Cart result = cartMapper.findByCid(cid);
-//        System.out.println(result);
-//    }
-//
-//    @Test
-//    public void findVOByCids() {
-//        Integer[] cids = {1, 2, 6, 7, 8, 9, 10};
-//        List<CartVO> list = cartMapper.findVOByCids(cids);
-//        System.out.println("count=" + list.size());
-//        for (CartVO item : list) {
-//            System.out.println(item);
-//        }
-//    }
+    @Test
+    public void findByCid() {
+        Integer cid = 1;
+        Cart result = cartMapper.findByCid(cid);
+        System.out.println(result);
+    }
+
+    @Test
+    public void findVOByCids() {
+        Integer[] cids = {1, 2, 6, 7, 8, 9, 10};
+        List<CartVO> list = cartMapper.findVOByCids(cids);
+        System.out.println("count=" + list.size());
+        for (CartVO item : list) {
+            System.out.println(item);
+        }
+    }
 }

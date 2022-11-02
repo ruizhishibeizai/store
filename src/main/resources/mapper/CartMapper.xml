@@ -68,36 +68,41 @@
     </select>
 
     <!-- 根据购物车数据id查询购物车数据详情：Cart findByCid(Integer cid) -->
-<!--    <select id="findByCid" resultMap="CartEntityMap">-->
-<!--        SELECT-->
-<!--            *-->
-<!--        FROM-->
-<!--            t_cart-->
-<!--        WHERE-->
-<!--            cid = #{cid}-->
-<!--    </select>-->
+    <select id="findByCid" resultMap="CartEntityMap">
+        SELECT
+            *
+        FROM
+            t_cart
+        WHERE
+            cid = #{cid}
+    </select>
 
     <!-- 根据若干个购物车数据id查询详情的列表：List<CartVO> findVOByCids(Integer[] cids) -->
-<!--    <select id="findVOByCids" resultType="com.cy.store.vo.CartVO">-->
-<!--        SELECT-->
-<!--            cid,-->
-<!--            uid,-->
-<!--            pid,-->
-<!--            t_cart.price,-->
-<!--            t_cart.num,-->
-<!--            t_product.title,-->
-<!--            t_product.price AS realPrice,-->
-<!--            t_product.image-->
-<!--        FROM-->
-<!--            t_cart-->
-<!--                LEFT JOIN t_product ON t_cart.pid = t_product.id-->
-<!--        WHERE-->
-<!--            cid IN (-->
-<!--                <foreach collection="array" item="cid" separator=",">-->
-<!--                    #{cid}-->
-<!--                </foreach>-->
-<!--            )-->
-<!--        ORDER BY-->
-<!--            t_cart.created_time DESC-->
-<!--    </select>-->
+    <select id="findVOByCids" resultType="com.cy.store.vo.CartVO">
+        SELECT
+            cid,
+            uid,
+            pid,
+            t_cart.price,
+            t_cart.num,
+            t_product.title,
+            t_product.price AS realPrice,
+            t_product.image
+        FROM
+            t_cart
+                LEFT JOIN t_product ON t_cart.pid = t_product.id
+        WHERE
+            cid IN (
+            --  foreach代表循环
+            --  collection="array" 代表循环的是一个数组
+            --  item代表取出的元素
+            --  separator=","代表取出的元素用什么分割，最后的逗号会省略
+
+                <foreach collection="array" item="cid" separator=",">
+                    #{cid}
+                </foreach>
+            )
+        ORDER BY
+            t_cart.created_time DESC
+    </select>
 </mapper>

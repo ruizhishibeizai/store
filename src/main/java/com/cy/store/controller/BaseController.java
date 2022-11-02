@@ -57,7 +57,11 @@ public class BaseController {
 //            result.setMessage("收获地址数据非法访问");
         }else if(e instanceof ProductNotFoundException) {
             result.setState(4006);
-//            result.setMessage("收获地址数据非法访问");else if(e instanceof InsertException){
+//            result.setMessage("收获地址数据非法访问");
+        }else if(e instanceof CartNotFoundException) {
+            result.setState(4007);
+//            result.setMessage("购物车数据不存在的异常");
+        }else if(e instanceof InsertException) {
             result.setState(5000);
 //            result.setMessage("注册产生未知异常");
         }else if(e instanceof UpdateException){

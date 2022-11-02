@@ -43,7 +43,7 @@ public interface IAddressService {
      * @param uid 归属的用户id
      * @return 匹配的收货地址详情
      */
-//    Address getByAid(Integer aid, Integer uid);
+    Address getByAid(Integer aid, Integer uid);
 }
 
 

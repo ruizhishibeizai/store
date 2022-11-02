@@ -42,29 +42,29 @@ public class CartServiceTests {
         }
     }
 
-//    @Test
-//    public void addNum() {
-//        try {
-//            Integer cid = 6;
-//            Integer uid = 31;
-//            String username = "管理员";
-//            Integer num = cartService.addNum(cid, uid, username);
-//            System.out.println("OK. New num=" + num);
-//        } catch (ServiceException e) {
-//            System.out.println(e.getClass().getSimpleName());
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//
-//    @Test
-//    public void getVOByCids() {
-//        Integer[] cids = {1, 2, 6, 7, 8, 9, 10};
-//        Integer uid = 31;
-//        List<CartVO> list = cartService.getVOByCids(uid, cids);
-//        System.out.println("count=" + list.size());
-//        for (CartVO item : list) {
-//            System.out.println(item);
-//        }
-//    }
+    @Test
+    public void addNum() {
+        try {
+            Integer cid = 1;
+            Integer uid = 7;
+            String username = "管理员";
+            Integer num = cartService.addNum(cid, uid, username);
+            System.out.println("OK. New num=" + num);
+        } catch (ServiceException e) {
+            System.out.println(e.getClass().getSimpleName());
+            System.out.println(e.getMessage());
+        }
+    }
+
+    @Test
+    public void getVOByCids() {
+        Integer[] cids = {1, 2, 3, 7, 8, 9, 10};
+        Integer uid = 7;
+        List<CartVO> list = cartService.getVOByCids(uid, cids);
+        System.out.println("count=" + list.size());
+        for (CartVO item : list) {
+            System.out.println(item);
+        }
+    }
 
 }
